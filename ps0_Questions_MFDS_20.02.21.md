@@ -1,0 +1,5 @@
+1. A markdown file can be used to produce simply formatted text in a markdown language (e.g. GitHub Flavored Markdown, GFM). These are designed to be easily written and read, and are commonly used in web development.
+2. A conda environment is a collection of packages (e.g. NumPy) compatible with python, stored together in a directory.
+3. Different versions of python must be installed into different environments. These can then be toggled by activating the respective environment for the version you wish to use.
+4. Git falls under a class of software known as a version control system (VCS). These systems allow iterations of files to be compared, and tracking of changes made over time.
+5. A Git branch denotes a new stage of development, which can be independent from the main line. Git also allows merging and comparison between commits in separate branches.  
