@@ -5,7 +5,6 @@
 #   4. Prints out the log (base 2) of “x”.
 
 import numpy
-x = float(input("Enter number x: "))
-y = float(input("Enter number y: "))
+x,y = float(input("Enter number x: ")), float(input("Enter number y: "))
 print("x**y =",int(x**y))
 print("log2(x) =",int(numpy.log2(x)))
