@@ -6,5 +6,5 @@
 
 import numpy
 x,y = float(input("Enter number x: ")), float(input("Enter number y: "))
-print("x**y =",int(x**y))
-print("log2(x) =",int(numpy.log2(x)))
+print("x**y =",x**y)
+print("log2(x) =",numpy.log2(x))
