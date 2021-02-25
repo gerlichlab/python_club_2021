@@ -10,7 +10,7 @@ print ("Please input number Y")
 y = float(input ())
 #Print out number X raised to the power of Y
 print ("The results of ", x, " to the power of ", y, " is ", x**y)
-#Print out log (base2) of X if X => 0
+#Print out log (base2) of X
 if x > 0:
     print ("The log2 of ", x, " is ", np.log2(x))
 else:
