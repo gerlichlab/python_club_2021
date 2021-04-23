@@ -1,7 +1,3 @@
-# improvements: two functions for bisection search and for calculating the savings
-# the bisection search should take the 1st function as an input (code from Max Spicer) to make it independnt from the input
-# this way the bisection search becomes independent of the input you give to it
-# this way code blocks can be used separately and for different things
 
 def calc_saving(starting_salary, guess_portion_saved):
     """Calculates the savings within 36 months.
