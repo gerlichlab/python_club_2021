@@ -135,17 +135,45 @@ def hangman(secret_word):
     
     Follows the other limitations detailed in the problem write-up.
     '''
-    print('Welcome to the game Hangman!')
-    P = len(secret_word)
-    print('I am thinking of a word that is' + p + 'letters long')
-    print('You have 6 guesses left')
+    #set initial variables that will change with each round of guessing
     letters_guessed = []
-    letters_guessed.append(str(input('Please provide a letter:'))
-    if letters_guessed[-1] not in all_letters:
-            print('I said a letter!')
-            letters_guessed.pop()
-            letters_guessed.append(str(input('Try again:'))
+    P = len(secret_word)
+    number_of_guesses = 6
+    number_of_warnings = 3
+
+  #do I want to implement a while loop for is_word_guessed at this point?
+    #print things for user before the first guess
+    print('Welcome to the game Hangman!')
+    print('I am thinking of a word that is' + P + 'letters long')
+    print('You have ' + number_of_guesses + 'guesses left')
+    print('The remaining letters are:', get_available_letters(letters_guessed))
+
+
+    #now get the user to provide a letter that hasn't been used before
+    letters_guessed.append(str.lower(input('Please provide a letter:'))
+    while letters_guessed[-1] not in all_letters:
+      print('I said a letter!')
+      letters_guessed.pop()
+      number_of_warnings = number_of_warnings - 1
+      print('You have ' + number_of_warnings + 'warnings left')
+      if number_of_warnings = 0:
+        number_of_guesses = number_of_guesses - 1
+      letters_guessed.append(str.lower(input('Try again:'))
+
+    if letters_guessed[-1] not in available_letters:
+      print('You are trying a letter you already used!')
+      letters_guessed.pop()
+      number_of_warnings = number_of_warnings - 1
+      print('You have ' + number_of_warnings + 'warnings left')
+      if number_of_warnings = 0:
+        number_of_guesses = number_of_guesses - 1
+      letters_guessed.append(str.lower(input('Try again:')))
     
+
+    if is_word_guessed(secret_word, letters_guessed) = True:
+      print('Great job, you guessed the word')
+    else:
+      print('You have not guessed the word yet')
                         
     
 
