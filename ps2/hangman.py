@@ -50,8 +50,7 @@ def choose_word(wordlist):
 # so that it can be accessed from anywhere in the program
 wordlist = load_words()
 
-secret_word = 'apple'
-letters_guessed = ['a','p','p','l','e']
+
 def is_word_guessed(secret_word, letters_guessed):
     '''
     secret_word: string, the word the user is guessing; assumes all letters are
@@ -64,13 +63,11 @@ def is_word_guessed(secret_word, letters_guessed):
     for i in secret_word:
         if i not in letters_guessed:
             return(False)
-            break 
     return(True)
-print(is_word_guessed(secret_word, letters_guessed))
+
     
     
-secret_word = 'apple'
-letters_guessed = ['p','p','e']
+
 guess=[]
 def get_guessed_word(secret_word, letters_guessed):
     '''
@@ -86,12 +83,12 @@ def get_guessed_word(secret_word, letters_guessed):
             guess.append("_ ")           
     return(''.join(guess))
 
-print(get_guessed_word(secret_word, letters_guessed))
+
 
 
 all_letters = "abcdefghijklmnopqrstuvwxyz"
 available_letters = []
-letters_guessed = ['p','p','e']
+
 def get_available_letters(letters_guessed):
     '''
     letters_guessed: list (of letters), which letters have been guessed so far
@@ -104,12 +101,7 @@ def get_available_letters(letters_guessed):
         else:
             available_letters.append(i)
     return(''.join(available_letters))
-
-print(get_available_letters(letters_guessed))
-    
-    
-    
-
+  
 def hangman(secret_word):
     '''
     secret_word: string, the secret word to guess.
@@ -136,46 +128,77 @@ def hangman(secret_word):
     Follows the other limitations detailed in the problem write-up.
     '''
     #set initial variables that will change with each round of guessing
+    vowels = ['a', 'e', 'i', 'o', 'u']
     letters_guessed = []
     P = len(secret_word)
     number_of_guesses = 6
     number_of_warnings = 3
+    total_score = 0
 
-  #do I want to implement a while loop for is_word_guessed at this point?
-    #print things for user before the first guess
-    print('Welcome to the game Hangman!')
-    print('I am thinking of a word that is' + P + 'letters long')
-    print('You have ' + number_of_guesses + 'guesses left')
-    print('The remaining letters are:', get_available_letters(letters_guessed))
+    while True:
+
+      #print things for user before the first guess
+      print('Welcome to the game Hangman!')
+      print(f'I am thinking of a word that is {P} letters long')
+      print(f'You have {number_of_guesses} guesses left')
+      print(f'You have {number_of_warnings} warnings left')
+      print('The available letters are' + get_available_letters(letters_guessed))
 
 
-    #now get the user to provide a letter that hasn't been used before
-    letters_guessed.append(str.lower(input('Please provide a letter:'))
-    while letters_guessed[-1] not in all_letters:
-      print('I said a letter!')
-      letters_guessed.pop()
-      number_of_warnings = number_of_warnings - 1
-      print('You have ' + number_of_warnings + 'warnings left')
-      if number_of_warnings = 0:
-        number_of_guesses = number_of_guesses - 1
-      letters_guessed.append(str.lower(input('Try again:'))
+      #now get the user to provide a letter that hasn't been used before
+      letters_guessed.append(str.lower(input('Please provide a letter:')))
 
-    if letters_guessed[-1] not in available_letters:
-      print('You are trying a letter you already used!')
-      letters_guessed.pop()
-      number_of_warnings = number_of_warnings - 1
-      print('You have ' + number_of_warnings + 'warnings left')
-      if number_of_warnings = 0:
-        number_of_guesses = number_of_guesses - 1
-      letters_guessed.append(str.lower(input('Try again:')))
-    
+      while True:
+        if letters_guessed[-1] not in all_letters:
+          print('I said a letter!')
+          letters_guessed.pop()
+          number_of_warnings = number_of_warnings - 1
+          print(f'You have  {number_of_warnings} warnings left')
+          if number_of_warnings == 0:
+            number_of_guesses = number_of_guesses - 1
+          letters_guessed.append(str.lower(input('Try again:')))
+        else:
+          break
 
-    if is_word_guessed(secret_word, letters_guessed) = True:
-      print('Great job, you guessed the word')
-    else:
-      print('You have not guessed the word yet')
-                        
-    
+      while True:    
+        if letters_guessed[-1] not in available_letters:
+          print('You are trying a letter you already used!')
+          letters_guessed.pop()
+          number_of_warnings = number_of_warnings - 1
+          print(f'You have {number_of_warnings} warnings left')
+          if number_of_warnings == 0:
+            number_of_guesses = number_of_guesses - 1
+          letters_guessed.append(str.lower(input('Try again:')))
+        else:
+          break
+
+      #here is where you give the output of a round to the user
+      if letters_guessed[-1] in secret_word:
+        print('Good guess!' + get_guessed_word(secret_word, letters_guessed))
+      else:
+        if letters_guessed[-1] in vowels:
+          print('Wrong guess!' + get_guessed_word(secret_word, letters_guessed))
+          number_of_guesses = number_of_guesses - 2
+        else:
+          print('Your letter is not in the word' + get_guessed_word(secret_word, letters_guessed))
+          number_of_guesses = number_of_guesses - 1
+      
+      #check that there are still more chances for guessing 
+      if number_of_guesses == 0:
+        print('You have not managed to guess the word :(. Game over.')
+        print('The secret word was' + secret_word)
+      else:
+        if is_word_guessed == True:
+          print('Great job, you guessed the word')
+          total_score = number_of_guesses * len(secret_word)
+          print(f"Your total score is {total_score}")  
+          break    
+
+      #end of the guessing round
+      print('------------------------------------------------------------------------------')
+
+  
+      
 
 
 
