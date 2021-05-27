@@ -68,7 +68,7 @@ def is_word_guessed(secret_word, letters_guessed):
     
     
 
-guess=[]
+
 def get_guessed_word(secret_word, letters_guessed):
     '''
     secret_word: string, the word the user is guessing
@@ -76,6 +76,7 @@ def get_guessed_word(secret_word, letters_guessed):
     returns: string, comprised of letters, underscores (_), and spaces that represents
       which letters in secret_word have been guessed so far.
     '''
+    guess=[]
     for i in secret_word:
         if i in letters_guessed:
             guess.append(i)
@@ -86,22 +87,20 @@ def get_guessed_word(secret_word, letters_guessed):
 
 
 
-all_letters = "abcdefghijklmnopqrstuvwxyz"
-available_letters = []
-
+available_letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+ 
 def get_available_letters(letters_guessed):
     '''
     letters_guessed: list (of letters), which letters have been guessed so far
     returns: string (of letters), comprised of letters that represents which letters have not
       yet been guessed.
     '''
-    for i in all_letters:
-        if i in letters_guessed:
-            available_letters.append("")
-        else:
-            available_letters.append(i)
+    for i in letters_guessed:
+      if i in available_letters:
+        available_letters.remove(i)
     return(''.join(available_letters))
-  
+
+      
 def hangman(secret_word):
     '''
     secret_word: string, the secret word to guess.
@@ -134,15 +133,15 @@ def hangman(secret_word):
     number_of_guesses = 6
     number_of_warnings = 3
     total_score = 0
+    print('Welcome to the game Hangman!')
+    print(f'I am thinking of a word that is {P} letters long')
 
     while True:
 
       #print things for user before the first guess
-      print('Welcome to the game Hangman!')
-      print(f'I am thinking of a word that is {P} letters long')
       print(f'You have {number_of_guesses} guesses left')
       print(f'You have {number_of_warnings} warnings left')
-      print('The available letters are' + get_available_letters(letters_guessed))
+      print('The available letters are ' + get_available_letters(letters_guessed))
 
 
       #now get the user to provide a letter that hasn't been used before
@@ -156,6 +155,10 @@ def hangman(secret_word):
           print(f'You have  {number_of_warnings} warnings left')
           if number_of_warnings == 0:
             number_of_guesses = number_of_guesses - 1
+          if number_of_guesses == 0:
+            print('You have not managed to guess the word :(. Game over.')
+            print('The secret word was' + secret_word)
+            break
           letters_guessed.append(str.lower(input('Try again:')))
         else:
           break
@@ -168,31 +171,36 @@ def hangman(secret_word):
           print(f'You have {number_of_warnings} warnings left')
           if number_of_warnings == 0:
             number_of_guesses = number_of_guesses - 1
+          if number_of_guesses == 0:
+            print('You have not managed to guess the word :(. Game over.')
+            print('The secret word was' + secret_word)
+            break
           letters_guessed.append(str.lower(input('Try again:')))
         else:
           break
 
       #here is where you give the output of a round to the user
       if letters_guessed[-1] in secret_word:
-        print('Good guess!' + get_guessed_word(secret_word, letters_guessed))
+        print('Good guess!' + get_guessed_word(secret_word, letters_guessed))               #scenario: you guessed the letter
       else:
-        if letters_guessed[-1] in vowels:
+        if number_of_guesses == 0:                                                          #scenario you didn't guess the letter: first check that there were enough guesses to continue the game
+          print('You have not managed to guess the word :(. Game over.')
+          print('The secret word was' + secret_word)
+          break
+
+        if letters_guessed[-1] in vowels:                                                   #you didn't guess the letter and you put in a vowel  
           print('Wrong guess!' + get_guessed_word(secret_word, letters_guessed))
           number_of_guesses = number_of_guesses - 2
         else:
-          print('Your letter is not in the word' + get_guessed_word(secret_word, letters_guessed))
+          print('Wrong guess!' + get_guessed_word(secret_word, letters_guessed))            #you didn't guess the letter and you put in a consonant
           number_of_guesses = number_of_guesses - 1
       
-      #check that there are still more chances for guessing 
-      if number_of_guesses == 0:
-        print('You have not managed to guess the word :(. Game over.')
-        print('The secret word was' + secret_word)
-      else:
-        if is_word_guessed == True:
-          print('Great job, you guessed the word')
-          total_score = number_of_guesses * len(secret_word)
-          print(f"Your total score is {total_score}")  
-          break    
+            
+      if is_word_guessed(secret_word,letters_guessed) == True:                                                           #check before entering a new round that the word is not yet guessed
+        print('Great job, you guessed the word')
+        total_score = number_of_guesses * len(secret_word)
+        print(f"Your total score is {total_score}")  
+        break    
 
       #end of the guessing round
       print('------------------------------------------------------------------------------')
