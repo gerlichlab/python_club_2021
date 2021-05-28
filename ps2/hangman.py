@@ -233,8 +233,59 @@ def match_with_gaps(my_word, other_word):
         _ , and my_word and other_word are of the same length;
         False otherwise: 
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    my_word = 'te_t'
+    other_word = 'tact'
+   
+    
+    if len(my_word) != len(other_word):                       
+      return(False)
+    
+    for i in range(len(my_word)):
+      current_letter = my_word(i)
+      other_letter = other_word(i)
+      if current_letter == other_letter:
+        check = True
+      elif (current_letter == "_") and (other_letter not in my_word):
+        check = True
+      else:
+        check = False
+        return(False)
+    return(True)
+    
+  print(match_with_gaps(my_word, other_word))
+
+
+
+
+
+
+
+      if my_word(i) == other_word(i):
+        check == True
+      elif (my_word(i) == '_') and (other_word(i) not in my_word):
+        check == True
+      else:
+        check == False
+
+    if check == False
+      return(False)
+    else:
+      return(True)
+      
+
+
+
+
+    
+        
+
+
+         
+   
+    
+
+  
+     
 
 
 
