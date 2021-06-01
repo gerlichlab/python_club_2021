@@ -136,7 +136,7 @@ def hangman(secret_word):
     print('Welcome to the game Hangman!')
     print(f'I am thinking of a word that is {P} letters long')
 
-    while True:
+    while True:                                                                               #the while loop that allows the continuation of the game after each guess
 
       #print things for user before the first guess
       print(f'You have {number_of_guesses} guesses left')
@@ -222,7 +222,8 @@ def hangman(secret_word):
 
 # -----------------------------------
 
-
+my_word = 'ta_t'
+other_word = 'tact'
 
 def match_with_gaps(my_word, other_word):
     '''
@@ -233,60 +234,26 @@ def match_with_gaps(my_word, other_word):
         _ , and my_word and other_word are of the same length;
         False otherwise: 
     '''
-    my_word = 'te_t'
-    other_word = 'tact'
+    #my_word = 'te_t'
+    #other_word = 'tact'
    
     
     if len(my_word) != len(other_word):                       
       return(False)
-    
-    for i in range(len(my_word)):
-      current_letter = my_word(i)
-      other_letter = other_word(i)
-      if current_letter == other_letter:
-        check = True
-      elif (current_letter == "_") and (other_letter not in my_word):
-        check = True
-      else:
-        check = False
-        return(False)
-    return(True)
-    
-  print(match_with_gaps(my_word, other_word))
-
-
-
-
-
-
-
-      if my_word(i) == other_word(i):
-        check == True
-      elif (my_word(i) == '_') and (other_word(i) not in my_word):
-        check == True
-      else:
-        check == False
-
-    if check == False
-      return(False)
     else:
-      return(True)
+      for i in range(len(my_word)):
+        current_letter = my_word[i]
+        other_letter = other_word[i]
+        if current_letter == other_letter:
+          check = True
+        elif (current_letter == "_") and (other_letter not in my_word):
+          check = True
+        else:
+          check = False
+          break
+      return(check)
       
-
-
-
-
-    
-        
-
-
-         
-   
-    
-
-  
-     
-
+print(match_with_gaps(my_word, other_word))
 
 
 def show_possible_matches(my_word):
@@ -299,8 +266,16 @@ def show_possible_matches(my_word):
              that has already been revealed.
 
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    list_of_possible_words = []
+    for word in wordlist:
+      match_with_gaps(my_word, word)
+      if match_with_gaps == True:
+        list_of_possible_words.append(word)
+    print('_'.join(list_of_possible_words))
+
+    if ''.join(list_of_possible_words) == '':
+     print('There are no matches found')
+
 
 
 
@@ -348,13 +323,13 @@ if __name__ == "__main__":
     # To test part 2, comment out the pass line above and
     # uncomment the following two lines.
     
-    secret_word = choose_word(wordlist)
-    hangman(secret_word)
+    #secret_word = choose_word(wordlist)
+    #hangman(secret_word)
 
 ###############
     
     # To test part 3 re-comment out the above lines and 
     # uncomment the following two lines. 
     
-    #secret_word = choose_word(wordlist)
-    #hangman_with_hints(secret_word)
+    secret_word = choose_word(wordlist)
+    hangman_with_hints(secret_word)
