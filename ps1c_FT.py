@@ -5,10 +5,10 @@ total_cost = 1000000
 portion_down_payment = total_cost * 0.25
 
 epsilon = 100
-min_rate = 0        
+min_rate = 0
 max_rate = 10000
 
-portion_saved = ((max_rate + min_rate) / 2)
+portion_saved = (max_rate + min_rate) / 2
 steps = 0
 rate_found = False
 
@@ -34,13 +34,13 @@ while abs(min_rate - max_rate) > 0.1:
         min_rate = portion_saved
     elif current_savings > portion_down_payment + epsilon:
         max_rate = portion_saved
-    
-    portion_saved = ((max_rate + min_rate) / 2)
 
-portion_saved = portion_saved /10000    
+    portion_saved = (max_rate + min_rate) / 2
+
+portion_saved = portion_saved / 10000
 if rate_found:
-    print(f'Starting salary: {starting_salary}')
-    print(f'Best savings rate: {portion_saved:.4f}')
-    print(f'Steps in bisection search: {steps}')
+    print(f"Starting salary: {starting_salary}")
+    print(f"Best savings rate: {portion_saved:.4f}")
+    print(f"Steps in bisection search: {steps}")
 else:
     print("Is is not possible to pay the down payment in three years")
