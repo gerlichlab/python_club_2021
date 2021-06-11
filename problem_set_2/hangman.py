@@ -208,7 +208,7 @@ def match_with_gaps(my_word, other_word):
           character_position +=1
     return match_result
          
-print(match_with_gaps("t_ _ _ _ _ a","tapioca"))
+#print(match_with_gaps("t_ _ _ _ _ a","tapioca"))
 
 
 
@@ -231,7 +231,7 @@ def show_possible_matches(my_word):
     print(possible_matches)
     return possible_matches
 
-show_possible_matches("t_ _ _ _ _ a")
+#show_possible_matches("t_ _ _ _ _ a")
 
 
 def hangman_with_hints(secret_word):
@@ -316,7 +316,6 @@ def hangman_with_hints(secret_word):
 
 
 if __name__ == "__main__":
-    pass
 
     # To test part 2, comment out the pass line above and
     # uncomment the following two lines.
